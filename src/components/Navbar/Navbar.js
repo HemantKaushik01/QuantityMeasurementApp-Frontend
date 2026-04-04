@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FiHome, FiRepeat, FiSettings, FiClock, FiLogOut, FiLogIn, FiMenu, FiX, FiUser } from 'react-icons/fi';
+import { FiHome, FiRepeat, FiSettings, FiClock, FiLogOut, FiLogIn, FiMenu, FiX } from 'react-icons/fi';
 import './Navbar.css';
 
 const Navbar = () => {
@@ -19,7 +19,7 @@ const Navbar = () => {
     const parsed = JSON.parse(userRaw);
     userName = parsed?.name || parsed?.username || parsed?.email?.split('@')[0] || 'User';
     userEmail = parsed?.email || '';
-  } catch {}
+  } catch { }
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -75,9 +75,8 @@ const Navbar = () => {
             <Link
               key={link.id}
               to={link.to}
-              className={`navbar-link ${
-                location.pathname === link.to ? 'active' : ''
-              }`}
+              className={`navbar-link ${location.pathname === link.to ? 'active' : ''
+                }`}
               id={link.id}
               onClick={() => handleNavClick()}
             >

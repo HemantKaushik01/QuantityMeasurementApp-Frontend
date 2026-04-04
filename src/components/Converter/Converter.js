@@ -222,7 +222,7 @@ const Converter = ({ initialMode = 'convert' }) => {
     if (!newAvailableOps.find(op => op.id === operation)) {
       setOperation(newAvailableOps[0].id);
     }
-  }, [initialMode, selectedType]);
+  }, [initialMode, selectedType, operation]);
 
   const handleSwap = () => {
     setFromUnit(toUnit);
