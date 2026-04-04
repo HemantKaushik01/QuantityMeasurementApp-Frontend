@@ -1,0 +1,11 @@
+/* src/components/InteractiveBackground/InteractiveBackground.css */
+.interactive-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  pointer-events: none; /* Let all clicks pass through */
+  background: transparent; /* Assuming index.css handles body bgcolor */
+}
