@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiUser, FiMail, FiLock, FiEye, FiEyeOff, FiArrowRight } from 'react-icons/fi';
-import { GoogleLogin } from '@react-oauth/google';
 import { authAPI } from '../../services/api';
 import '../Login/Auth.css';
 
@@ -55,25 +54,6 @@ const Signup = () => {
     }
   };
 
-  const handleGoogleSuccess = async (credentialResponse) => {
-    setLoading(true);
-    setError('');
-    try {
-      const data = await authAPI.googleLogin(credentialResponse.credential);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify({ email: data.email || 'Google User' }));
-      navigate('/');
-    } catch (err) {
-      setError(err.message || 'Google sign-up failed. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleGoogleError = () => {
-    setError('Google sign-up was unsuccessful. Please try again.');
-  };
-
   return (
     <div className="auth-page" id="signup-page">
       <div className="auth-bg">
@@ -106,16 +86,14 @@ const Signup = () => {
 
         {/* Google OAuth Button */}
         <div className="google-login-wrapper" id="google-signup-btn">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleError}
-            theme="outline"
-            size="large"
-            width="360"
-            text="signup_with"
-            shape="rectangular"
-            logo_alignment="left"
-          />
+          <button
+            type="button"
+            className="custom-google-btn"
+            onClick={() => authAPI.loginWithGoogle()}
+          >
+            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google logo" className="google-btn-logo" />
+            <span>Sign up with Google</span>
+          </button>
         </div>
 
         <div className="auth-divider">

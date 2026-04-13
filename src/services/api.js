@@ -20,6 +20,8 @@ const getAuthHeaders = () => {
   return headers;
 };
 
+
+
 // ================= RESPONSE HANDLER =================
 const handleResponse = async (response) => {
   const contentType = response.headers.get("content-type");
