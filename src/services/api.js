@@ -1,9 +1,17 @@
 
 // ================= BASE URL =================
 
-// 👉 LOCAL (default)
-const BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:8080/api/v1";
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8080";
+// Automatically detect if we are running in local development (localhost) or in production
+const isDevelopment = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1";
+
+// If local, use localhost backend. If deployed, use Render backend (or environment variables)
+const BASE_URL = isDevelopment 
+  ? "http://localhost:8080/api/v1" 
+  : (process.env.REACT_APP_API_URL || "https://quantitymeasurementapp-jczi.onrender.com/api/v1");
+
+const BACKEND_URL = isDevelopment 
+  ? "http://localhost:8080" 
+  : (process.env.REACT_APP_BACKEND_URL || "https://quantitymeasurementapp-jczi.onrender.com");
 
 // ================= AUTH HEADER =================
 const getAuthHeaders = () => {
